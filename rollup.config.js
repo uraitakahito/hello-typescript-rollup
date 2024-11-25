@@ -3,11 +3,13 @@ import typescript from "@rollup/plugin-typescript";
 import { defineConfig } from "rollup";
 
 const config = defineConfig({
-  input: "./src/app.ts",
-  output: {
-    file: "bundle.js",
-    format: "iife",
-  },
+  input: "./src/app.ts", // conditionally required
+  output: [
+    {
+      file: "bundle.js",
+      format: "iife",
+    }
+  ],
   plugins: [typescript()],
 });
 
