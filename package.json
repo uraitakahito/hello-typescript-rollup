@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "rollup --config",
-    "start": "rollup --config --watch"
+    "build": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
+    "start": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --watch"
   },
   "author": "",
   "license": "Apache-2.0",
