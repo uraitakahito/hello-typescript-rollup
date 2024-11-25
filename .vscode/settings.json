@@ -1,0 +1,33 @@
+// Settings file locations
+// Depending on your platform, the user settings file is located here:
+//   Windows %APPDATA%\Code\User\settings.json
+//   macOS $HOME/Library/Application\ Support/Code/User/settings.json
+//   Linux $HOME/.config/Code/User/settings.json
+{
+  //
+  // Basic Editing
+  //
+  // https://code.visualstudio.com/docs/editor/codebasics#_how-do-i-turn-on-word-wrap
+  "editor.wordWrap": "on",
+
+  // To actually start using the workspace version for IntelliSense,
+  // you **MUST RUN** the TypeScript: Select TypeScript Version command
+  // and select the workspace version.
+  // https://code.visualstudio.com/docs/typescript/typescript-compiling#_using-newer-typescript-versions
+  "typescript.tsdk": "./node_modules/typescript/lib",
+
+  // https://code.visualstudio.com/docs/typescript/typescript-editing
+  "typescript.implementationsCodeLens.enabled": true,
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.suggest.autoImports": true,
+
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "[typescript]": {
+    "editor.formatOnSave": false
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": false
+  }
+}
