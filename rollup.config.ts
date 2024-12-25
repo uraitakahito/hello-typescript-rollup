@@ -28,6 +28,19 @@ const config: RollupOptions[] = [
     ],
     plugins: [typescript({ rootDir: 'src' })],
   },
+  {
+    input: './src/import-check/import-check-1.ts',
+    output: [
+      {
+        dir: 'dist',
+        format: 'es',
+        // Make sure to remove the sourceMap option from your tsconfig.json:
+        // https://github.com/rollup/plugins/issues/216#issuecomment-1776899097
+        sourcemap: true,
+      },
+    ],
+    plugins: [typescript({ rootDir: 'src' })],
+  },
 ];
 
 export default config;
