@@ -1,24 +1,33 @@
 import typescript from '@rollup/plugin-typescript';
 import type { RollupOptions } from 'rollup';
 
-const config: RollupOptions = {
-  input: './src/app.ts', // conditionally required
-  output: [
-    {
-      file: 'dist/iife/bundle.js',
-      format: 'iife',
-    },
-    {
-      dir: 'dist/es6',
-      format: 'es',
-    },
-    {
-      dir: 'dist/umd',
-      format: 'umd',
-      name: 'MyModule',
-    },
-  ],
-  plugins: [typescript()],
-};
+const config: RollupOptions[] = [
+  {
+    input: './src/app.ts', // conditionally required
+    output: [
+      {
+        dir: 'dist',
+        format: 'es',
+        // Make sure to remove the sourceMap option from your tsconfig.json:
+        // https://github.com/rollup/plugins/issues/216#issuecomment-1776899097
+        sourcemap: true,
+      },
+    ],
+    plugins: [typescript({ rootDir: 'src' })],
+  },
+  {
+    input: './src/fizzbuzz.ts',
+    output: [
+      {
+        dir: 'dist',
+        format: 'es',
+        // Make sure to remove the sourceMap option from your tsconfig.json:
+        // https://github.com/rollup/plugins/issues/216#issuecomment-1776899097
+        sourcemap: true,
+      },
+    ],
+    plugins: [typescript({ rootDir: 'src' })],
+  },
+];
 
 export default config;
