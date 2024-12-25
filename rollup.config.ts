@@ -8,6 +8,15 @@ const config: RollupOptions = {
       file: 'dist/iife/bundle.js',
       format: 'iife',
     },
+    {
+      dir: 'dist/es6',
+      format: 'es',
+    },
+    {
+      dir: 'dist/umd',
+      format: 'umd',
+      name: 'MyModule',
+    },
   ],
   plugins: [typescript()],
 };
