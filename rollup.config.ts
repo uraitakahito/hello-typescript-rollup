@@ -5,7 +5,7 @@ const config: RollupOptions = {
   input: './src/app.ts', // conditionally required
   output: [
     {
-      file: 'bundle.js',
+      file: 'dist/iife/bundle.js',
       format: 'iife',
     },
   ],
