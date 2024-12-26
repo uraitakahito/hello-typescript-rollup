@@ -2,6 +2,7 @@
   "name": "hello-rollup-typescript",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "start": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --watch"
