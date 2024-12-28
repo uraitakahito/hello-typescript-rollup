@@ -23,6 +23,7 @@
     "tslib": "^2.8.1"
   },
   "dependencies": {
+    "@uraitakahito/hello-esmodule": "^1.0.2",
     "@uraitakahito/hello-npmjs": "^1.1.5"
   }
 }
