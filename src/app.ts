@@ -1,7 +1,7 @@
 function greeter(person: string): string {
-  return "Hello, " + person;
+  return `Hello, ${person}`;
 }
 
-const user: string = "World";
+const user: string = 'World';
 
 document.body.textContent = greeter(user);
