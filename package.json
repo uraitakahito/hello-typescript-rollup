@@ -20,6 +20,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^18.0.0",
     "eslint-plugin-import": "^2.31.0",
+    "npm-check-updates": "^17.1.13",
     "rollup": "^4.27.4",
     "tslib": "^2.8.1"
   },
