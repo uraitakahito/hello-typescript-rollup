@@ -109,9 +109,9 @@ const config: RollupOptions[] = [
     ],
     plugins: [typescript({ rootDir: 'src' })],
 
-    // The hello-npmjs package is not bundled into the output.
+    // The hello-esmodule package is not bundled into the output.
     // https://rollupjs.org/troubleshooting/#warning-treating-module-as-external-dependency
-    external: ['@uraitakahito/hello-npmjs'],
+    external: ['@uraitakahito/hello-esmodule'],
   },
 ];
 

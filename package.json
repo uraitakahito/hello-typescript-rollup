@@ -30,7 +30,6 @@
   "dependencies": {
     "@uraitakahito/hello-commonjs": "^1.0.6",
     "@uraitakahito/hello-conditional-exports": "^1.0.1",
-    "@uraitakahito/hello-esmodule": "^1.0.2",
-    "@uraitakahito/hello-npmjs": "^1.1.5"
+    "@uraitakahito/hello-esmodule": "^1.0.2"
   }
 }
