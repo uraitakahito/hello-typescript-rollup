@@ -85,7 +85,14 @@
     "declaration": true /* Generate .d.ts files from TypeScript and JavaScript files in your project. */,
     "declarationMap": true /* Create sourcemaps for d.ts files. */,
     // "emitDeclarationOnly": true,                      /* Only output d.ts files and not JavaScript files. */
-    "sourceMap": true /* Create source map files for emitted JavaScript files. */,
+
+    //
+    // Create source map files for emitted JavaScript files.
+    // However, when using Rollup, please enable sourceMap in Rollup options instead of tsconfig.json.
+    // https://github.com/rollup/plugins/issues/216#issuecomment-1776899097
+    //
+    // "sourceMap": true,
+
     // "inlineSourceMap": true,                          /* Include sourcemap files inside the emitted JavaScript. */
     // "outFile": "./",                                  /* Specify a file that bundles all outputs into one JavaScript file. If 'declaration' is true, also designates a file that bundles all .d.ts output. */
     "outDir": "./dist" /* Specify an output folder for all emitted files. */,
