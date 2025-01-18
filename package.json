@@ -4,6 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "clean": "npm run rmdir dist node_modules",
+    "cleandep": "npm run rmdir node_modules",
+    "rmdir": "node -e \"var fs = require('fs'); try{process.argv.slice(1).map((fpath) => fs.rmdirSync(fpath, { recursive: true }))}catch(err){console.log(err)}; process.exit(0);\"",
     "build": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "start": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --watch"
   },
@@ -13,20 +16,21 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^12.1.1",
+    "@rollup/plugin-typescript": "^12.1.2",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^18.0.0",
     "eslint-plugin-import": "^2.31.0",
-    "rollup": "^4.27.4",
+    "npm-check-updates": "^17.1.13",
+    "rollup": "^4.30.1",
+    "rollup-plugin-copy": "^3.5.0",
     "tslib": "^2.8.1"
   },
   "dependencies": {
     "@uraitakahito/hello-commonjs": "^1.0.6",
     "@uraitakahito/hello-conditional-exports": "^1.0.1",
-    "@uraitakahito/hello-esmodule": "^1.0.2",
-    "@uraitakahito/hello-npmjs": "^1.1.5"
+    "@uraitakahito/hello-esmodule": "^1.0.2"
   }
 }

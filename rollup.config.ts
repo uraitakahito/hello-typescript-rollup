@@ -6,21 +6,9 @@ import typescript from '@rollup/plugin-typescript';
 import resolve from '@rollup/plugin-node-resolve';
 // To generate a minified bundle with terser
 import terser from '@rollup/plugin-terser';
+import copy from 'rollup-plugin-copy'
 
 const config: RollupOptions[] = [
-  {
-    input: './src/app.ts', // conditionally required
-    output: [
-      {
-        dir: 'dist',
-        format: 'es',
-        // Make sure to remove the sourceMap option from your tsconfig.json:
-        // https://github.com/rollup/plugins/issues/216#issuecomment-1776899097
-        sourcemap: true,
-      },
-    ],
-    plugins: [typescript({ rootDir: 'src' })],
-  },
   {
     input: './src/fizzbuzz.ts',
     output: [
@@ -122,9 +110,29 @@ const config: RollupOptions[] = [
     ],
     plugins: [typescript({ rootDir: 'src' })],
 
-    // The hello-npmjs package is not bundled into the output.
+    // The hello-esmodule package is not bundled into the output.
     // https://rollupjs.org/troubleshooting/#warning-treating-module-as-external-dependency
-    external: ['@uraitakahito/hello-npmjs'],
+    external: ['@uraitakahito/hello-esmodule'],
+  },
+  {
+    input: './src/entry.ts',
+    output: [
+      {
+        dir: 'dist',
+        format: 'es',
+        // Make sure to remove the sourceMap option from your tsconfig.json:
+        // https://github.com/rollup/plugins/issues/216#issuecomment-1776899097
+        sourcemap: true,
+      },
+    ],
+    plugins: [
+      typescript({ rootDir: 'src' }),
+      copy({
+        targets: [
+          { src: 'src/test.html', dest: 'dist' },
+        ],
+      })
+    ],
   },
 ];
 
