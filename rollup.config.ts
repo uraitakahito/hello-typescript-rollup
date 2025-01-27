@@ -114,8 +114,9 @@ const config: RollupOptions[] = [
     // https://rollupjs.org/troubleshooting/#warning-treating-module-as-external-dependency
     external: ['@uraitakahito/hello-esmodule'],
   },
+
   {
-    input: './src/entry.ts',
+    input: './src/main.ts',
     output: [
       {
         dir: 'dist',
@@ -129,7 +130,7 @@ const config: RollupOptions[] = [
       typescript({ rootDir: 'src' }),
       copy({
         targets: [
-          { src: 'src/entry.html', dest: 'dist' },
+          { src: 'src/index.html', dest: 'dist' },
         ],
       }),
     ],
