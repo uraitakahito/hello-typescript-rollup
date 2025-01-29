@@ -6,7 +6,7 @@ import typescript from '@rollup/plugin-typescript';
 import resolve from '@rollup/plugin-node-resolve';
 // To generate a minified bundle with terser
 import terser from '@rollup/plugin-terser';
-import copy from 'rollup-plugin-copy';
+import copy from '@uraitakahito/rollup-plugin-copy';
 
 const config: RollupOptions[] = [
   {
@@ -132,6 +132,9 @@ const config: RollupOptions[] = [
         targets: [
           { src: 'src/index.html', dest: 'dist' },
         ],
+        verbose: true,
+        // https://github.com/uraitakahito/rollup-plugin-copy/blob/67dc1dc52190f126d94c53b6395fed0efceda389/readme.md#watchtargets
+        watchTargets: true,
       }),
     ],
   },
