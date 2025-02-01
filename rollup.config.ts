@@ -28,13 +28,13 @@ const config: RollupOptions[] = [
 
     output: [
       {
+        dir: 'dist/es6',
+        format: 'es',
+      },
+      {
         dir: 'dist/iife',
         format: 'iife',
         plugins: [terser()],
-      },
-      {
-        dir: 'dist/es6',
-        format: 'es',
       },
       {
         dir: 'dist/umd',
