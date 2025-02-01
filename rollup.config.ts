@@ -40,7 +40,13 @@ const config: RollupOptions[] = [
     output: [
       {
         dir: 'dist',
+
+        //
+        // What's so great about ES6 modules?
+        // https://github.com/rollup/rollup/wiki/ES6-modules#whats-so-great-about-es6-modules
+        //
         format: 'es',
+
         // Make sure to remove the sourceMap option from your tsconfig.json:
         // https://github.com/rollup/plugins/issues/216#issuecomment-1776899097
         sourcemap: true,
@@ -55,6 +61,11 @@ const config: RollupOptions[] = [
     output: [
       {
         dir: 'dist/es6',
+
+        //
+        // What's so great about ES6 modules?
+        // https://github.com/rollup/rollup/wiki/ES6-modules#whats-so-great-about-es6-modules
+        //
         format: 'es',
       },
       {
@@ -89,7 +100,13 @@ const config: RollupOptions[] = [
     output: [
       {
         dir: 'dist',
+
+        //
+        // What's so great about ES6 modules?
+        // https://github.com/rollup/rollup/wiki/ES6-modules#whats-so-great-about-es6-modules
+        //
         format: 'es',
+
         // Make sure to remove the sourceMap option from your tsconfig.json:
         // https://github.com/rollup/plugins/issues/216#issuecomment-1776899097
         sourcemap: true,
@@ -102,7 +119,13 @@ const config: RollupOptions[] = [
     output: [
       {
         dir: 'dist',
+
+        //
+        // What's so great about ES6 modules?
+        // https://github.com/rollup/rollup/wiki/ES6-modules#whats-so-great-about-es6-modules
+        //
         format: 'es',
+
         // Make sure to remove the sourceMap option from your tsconfig.json:
         // https://github.com/rollup/plugins/issues/216#issuecomment-1776899097
         sourcemap: true,
@@ -115,7 +138,13 @@ const config: RollupOptions[] = [
     output: [
       {
         dir: 'dist',
+
+        //
+        // What's so great about ES6 modules?
+        // https://github.com/rollup/rollup/wiki/ES6-modules#whats-so-great-about-es6-modules
+        //
         format: 'es',
+
         // Make sure to remove the sourceMap option from your tsconfig.json:
         // https://github.com/rollup/plugins/issues/216#issuecomment-1776899097
         sourcemap: true,
@@ -128,7 +157,13 @@ const config: RollupOptions[] = [
     output: [
       {
         dir: 'dist',
+
+        //
+        // What's so great about ES6 modules?
+        // https://github.com/rollup/rollup/wiki/ES6-modules#whats-so-great-about-es6-modules
+        //
         format: 'es',
+
         // Make sure to remove the sourceMap option from your tsconfig.json:
         // https://github.com/rollup/plugins/issues/216#issuecomment-1776899097
         sourcemap: true,
@@ -146,7 +181,13 @@ const config: RollupOptions[] = [
     output: [
       {
         dir: 'dist',
+
+        //
+        // What's so great about ES6 modules?
+        // https://github.com/rollup/rollup/wiki/ES6-modules#whats-so-great-about-es6-modules
+        //
         format: 'es',
+
         // Make sure to remove the sourceMap option from your tsconfig.json:
         // https://github.com/rollup/plugins/issues/216#issuecomment-1776899097
         sourcemap: true,
