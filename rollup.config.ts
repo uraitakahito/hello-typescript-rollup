@@ -8,7 +8,33 @@ import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import copy from '@uraitakahito/rollup-plugin-copy';
 
+import getFiles from './scripts/buildUtils';
+
+const extensions = ['.js', '.ts', '.jsx', '.tsx'];
+
 const config: RollupOptions[] = [
+  {
+    input: [
+      'src/get-files/main.js',
+      ...getFiles('src/get-files/a', extensions),
+      ...getFiles('src/get-files/b', extensions),
+    ],
+    output: [
+      {
+        dir: 'dist/es6/get-files',
+
+        //
+        // What's so great about ES6 modules?
+        // https://github.com/rollup/rollup/wiki/ES6-modules#whats-so-great-about-es6-modules
+        //
+        format: 'es',
+
+        preserveModules: true,
+        preserveModulesRoot: 'src',
+      },
+    ],
+  },
+
   {
     input: './src/fizzbuzz.ts',
     output: [
