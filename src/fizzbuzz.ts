@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-console */
 function fizzbuzz(n: number): number | 'Fizz' | 'Buzz' | 'FizzBuzz' {
   if (n % 15 === 0) {
@@ -12,9 +13,15 @@ function fizzbuzz(n: number): number | 'Fizz' | 'Buzz' | 'FizzBuzz' {
   return n;
 }
 
-let a: number = 1;
-console.log(fizzbuzz(a += 1));
-console.log(fizzbuzz(a += 1));
-console.log(fizzbuzz(a += 1));
-console.log(fizzbuzz(a += 1));
-console.log(fizzbuzz(a += 1));
+//
+// A compile error "Cannot redeclare block-scoped variable" occurs when defining a variable in TypeScript
+// https://ichinari.work/TypeScript_20211108/
+//
+{
+  let a: number = 1;
+  console.log(fizzbuzz(a += 1));
+  console.log(fizzbuzz(a += 1));
+  console.log(fizzbuzz(a += 1));
+  console.log(fizzbuzz(a += 1));
+  console.log(fizzbuzz(a += 1));
+}
