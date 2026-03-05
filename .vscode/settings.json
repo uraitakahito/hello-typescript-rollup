@@ -28,7 +28,7 @@
 
   // https://code.visualstudio.com/docs/typescript/typescript-editing
   "js/ts.implementationsCodeLens.enabled": true,
-  "typescript.referencesCodeLens.enabled": true,
+  "js/ts.referencesCodeLens.enabled": true,
   "typescript.suggest.autoImports": true,
 
   //
