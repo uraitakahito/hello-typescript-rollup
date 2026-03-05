@@ -65,7 +65,7 @@ export default tseslint.config(
   // Global ignores
   //
   {
-    ignores: ['dist/'],
+    ignores: ['dist/', '.Trash-*/'],
   },
 
   //
