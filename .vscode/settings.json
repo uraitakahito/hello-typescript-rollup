@@ -29,7 +29,7 @@
   // https://code.visualstudio.com/docs/typescript/typescript-editing
   "js/ts.implementationsCodeLens.enabled": true,
   "js/ts.referencesCodeLens.enabled": true,
-  "typescript.suggest.autoImports": true,
+  "js/ts.suggest.autoImports": true,
 
   //
   // ESLint
