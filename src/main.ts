@@ -1,9 +1,8 @@
 // https://github.com/mdn/js-examples/tree/main/module-examples/basic-modules
-/* eslint-disable no-magic-numbers */
-import { create, createReportList } from './modules/canvas.js';
+import { create, createReportList } from './modules/canvas';
 import randomSquare, {
   draw, reportArea, reportPerimeter,
-} from './modules/square.js';
+} from './modules/square';
 
 const root = document.getElementById('root');
 

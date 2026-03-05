@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import type { RollupOptions } from 'rollup';
 
 import typescript from '@rollup/plugin-typescript';

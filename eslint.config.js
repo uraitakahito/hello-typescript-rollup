@@ -181,7 +181,13 @@ export default tseslint.config(
       //   https://nodejs.org/api/esm.html#esm_mandatory_file_extensions
       //   https://github.com/import-js/eslint-plugin-import/blob/v2.17.2/docs/rules/extensions.md#examples
       //
-      'import-x/extensions': ['error', 'always', { ignorePackages: true }],
+      'import-x/extensions': ['error', 'always', {
+        ignorePackages: true,
+        pattern: {
+          ts: 'never',
+          tsx: 'never',
+        },
+      }],
 
       //
       // https://engineering.linecorp.com/ja/blog/you-dont-need-default-export

@@ -1,6 +1,3 @@
-/* eslint-disable max-len */
-/* eslint-disable no-magic-numbers */
-/* eslint-disable no-param-reassign */
 const name = 'square';
 
 const draw = (ctx: CanvasRenderingContext2D, length: number, x: number, y: number, color: string) => {
