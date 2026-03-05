@@ -13,7 +13,7 @@ Detailed environment setup instructions are described at the beginning of the `D
 ## Run
 
 ```console
-% rollup --config
+% npm run build
 % docker run -d --init --rm -p 8080:80 --mount type=bind,src=`pwd`/dist,dst=/usr/share/nginx/html --name nginx-container nginx
 ```
 
