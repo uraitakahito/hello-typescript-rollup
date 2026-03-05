@@ -91,7 +91,29 @@ export default tseslint.config(
   {
     languageOptions: {
       parserOptions: {
-        projectService: true,
+        //
+        // strictTypeChecked は全ファイルに @typescript-eslint/parser を適用し、
+        // projectService 経由で型情報を要求する。しかし tsconfig.json は
+        // デフォルトで .ts のみを対象とするため、.js ファイルは Project Service に
+        // 認識されず Parsing error になる。
+        //
+        // allowDefaultProject で .js ファイルを列挙し、defaultProject で
+        // allowJs: true を設定した ESLint 専用 tsconfig を指定することで、
+        // .js ファイルにも型情報を提供する。
+        //
+        // 注意: allowDefaultProject は ** を含む再帰 glob を禁止しているため、
+        // ディレクトリ階層ごとに個別のパターンを指定する必要がある。
+        // また、デフォルト上限は 8 ファイルである。
+        //
+        projectService: {
+          allowDefaultProject: [
+            'eslint.config.js',
+            'src/get-files/*.js',
+            'src/get-files/a/*.js',
+            'src/get-files/b/*.js',
+          ],
+          defaultProject: './tsconfig.eslint.json',
+        },
         tsconfigRootDir: import.meta.dirname,
       },
     },
@@ -196,6 +218,22 @@ export default tseslint.config(
           'response',
         ],
       }],
+    },
+  },
+
+  //
+  // Override for JS files
+  //
+  // JS ファイルは TypeScript のグローバル型定義 (lib.dom.d.ts 等) が適用されないため、
+  // console 等のグローバル変数が no-undef で未定義扱いになる。
+  // Node.js 環境のグローバル変数を明示的に設定する。
+  //
+  {
+    files: ['**/*.js'],
+    languageOptions: {
+      globals: {
+        console: 'readonly',
+      },
     },
   },
 

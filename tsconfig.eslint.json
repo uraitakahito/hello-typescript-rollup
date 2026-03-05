@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // JS ファイルを TypeScript プロジェクトに含める
+    "allowJs": true,
+    // JS ファイルの型チェックを有効化し、@typescript-eslint ルールに型情報を提供する
+    "checkJs": true,
+    // ESLint 専用 tsconfig からファイルを出力しない
+    // (ビルドは tsconfig.json + Rollup が担当)
+    "noEmit": true,
+    // node_modules 内の .d.ts の型エラーを無視する
+    // (eslint-plugin-import-x が依存する type-fest の型定義が見つからないエラーを回避)
+    "skipLibCheck": true
+  }
+}
