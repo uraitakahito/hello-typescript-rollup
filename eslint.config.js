@@ -170,6 +170,9 @@ const eslintConfig = defineConfig(
       // @typescript-eslint custom rules
       //
       '@typescript-eslint/naming-convention': namingConventionRule,
+      '@typescript-eslint/restrict-template-expressions': ['error', {
+        allowNumber: true,
+      }],
 
       //
       // import-x rules

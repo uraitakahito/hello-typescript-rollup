@@ -88,7 +88,7 @@ const config: RollupOptions[] = [
     //
     onwarn(warning, warn) {
       if (warning.code === 'UNRESOLVED_IMPORT') {
-        throw new Error(`Unresolved import: ${warning}`);
+        throw new Error(`Unresolved import: ${warning.message}`);
       }
       warn(warning);
     },
