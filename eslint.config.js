@@ -1,6 +1,7 @@
 import js from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import importX from 'eslint-plugin-import-x';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import { configs as tseslintConfigs } from 'typescript-eslint';
+import { flatConfigs as importXFlatConfigs } from 'eslint-plugin-import-x';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 
 //
@@ -61,13 +62,11 @@ const namingConventionRule = [
   },
 ];
 
-export default tseslint.config(
+const eslintConfig = defineConfig(
   //
   // Global ignores
   //
-  {
-    ignores: ['dist/', '.Trash-*/'],
-  },
+  globalIgnores(['dist/', '.Trash-*/']),
 
   //
   // ESLint recommended rules
@@ -78,12 +77,12 @@ export default tseslint.config(
   // typescript-eslint strict + type-checked rules
   // https://typescript-eslint.io/getting-started/typed-linting/
   //
-  ...tseslint.configs.strictTypeChecked,
+  ...tseslintConfigs.strictTypeChecked,
 
   //
   // eslint-plugin-import-x recommended config
   //
-  importX.flatConfigs.recommended,
+  importXFlatConfigs.recommended,
 
   //
   // Shared settings for all TypeScript files
@@ -254,3 +253,4 @@ export default tseslint.config(
     },
   },
 );
+export default eslintConfig;
