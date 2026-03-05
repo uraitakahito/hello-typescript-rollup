@@ -1,6 +1,8 @@
 import js from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import importX from 'eslint-plugin-import-x';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import { configs as tseslintConfigs } from 'typescript-eslint';
+import { flatConfigs as importXFlatConfigs } from 'eslint-plugin-import-x';
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 
 //
 // Naming conventions
@@ -60,13 +62,11 @@ const namingConventionRule = [
   },
 ];
 
-export default tseslint.config(
+const eslintConfig = defineConfig(
   //
   // Global ignores
   //
-  {
-    ignores: ['dist/', '.Trash-*/'],
-  },
+  globalIgnores(['dist/', '.Trash-*/']),
 
   //
   // ESLint recommended rules
@@ -77,13 +77,12 @@ export default tseslint.config(
   // typescript-eslint strict + type-checked rules
   // https://typescript-eslint.io/getting-started/typed-linting/
   //
-  ...tseslint.configs.strictTypeChecked,
+  ...tseslintConfigs.strictTypeChecked,
 
   //
   // eslint-plugin-import-x recommended config
   //
-  importX.flatConfigs.recommended,
-  importX.flatConfigs.typescript,
+  importXFlatConfigs.recommended,
 
   //
   // Shared settings for all TypeScript files
@@ -91,15 +90,89 @@ export default tseslint.config(
   {
     languageOptions: {
       parserOptions: {
-        projectService: true,
+        //
+        // strictTypeChecked は全ファイルに @typescript-eslint/parser を適用し、
+        // projectService 経由で型情報を要求する。しかし tsconfig.json は
+        // デフォルトで .ts のみを対象とするため、.js ファイルは Project Service に
+        // 認識されず Parsing error になる。
+        //
+        // allowDefaultProject で .js ファイルを列挙し、defaultProject で
+        // allowJs: true を設定した ESLint 専用 tsconfig を指定することで、
+        // .js ファイルにも型情報を提供する。
+        //
+        // 注意: allowDefaultProject は ** を含む再帰 glob を禁止しているため、
+        // ディレクトリ階層ごとに個別のパターンを指定する必要がある。
+        // また、デフォルト上限は 8 ファイルである。
+        //
+        projectService: {
+          allowDefaultProject: [
+            'eslint.config.js',
+            'src/get-files/*.js',
+            'src/get-files/a/*.js',
+            'src/get-files/b/*.js',
+          ],
+          defaultProject: './tsconfig.eslint.json',
+        },
         tsconfigRootDir: import.meta.dirname,
       },
     },
+    //
+    // import-x TypeScript settings
+    //
+    // importX.flatConfigs.typescript を使わず手動で設定している理由:
+    //
+    // flatConfigs.typescript は 'import-x/resolver': { typescript: true } を設定するが、
+    // これはレガシーリゾルバ API で eslint-import-resolver-typescript パッケージを探す仕組み。
+    // 内部で requireResolver("typescript") が呼ばれた際、eslint-import-resolver-typescript が
+    // 見つからないと TypeScript コンパイラ本体が代わりに読み込まれ、リゾルバインターフェースを
+    // 満たさないため "typescript with invalid interface loaded as resolver" エラーになる。
+    //
+    // これを避けるため、flatConfigs.typescript を削除し、以下のように手動で設定する:
+    // - settings: flatConfigs.typescript が提供していた extensions/parsers 等を手動記述
+    // - resolver-next: 新しいリゾルバ API (interfaceVersion 3) で eslint-import-resolver-typescript を使用
+    //
+    // 詳細: eslint-import-resolver-explanation.md
+    //
+    settings: {
+      // import-x がモジュール解決時に認識する拡張子
+      // （flatConfigs.typescript では .cts/.mts も含まれるが、このプロジェクトでは未使用のため省略）
+      'import-x/extensions': ['.ts', '.tsx', '.js', '.jsx'],
+      // @types/* パッケージの型定義も外部モジュールとして認識させる
+      'import-x/external-module-folders': ['node_modules', 'node_modules/@types'],
+      // .ts/.tsx ファイルを @typescript-eslint/parser でパースさせる
+      'import-x/parsers': {
+        '@typescript-eslint/parser': ['.ts', '.tsx'],
+      },
+      //
+      // resolver-next: 新しいリゾルバ API (interfaceVersion 3)
+      //
+      // レガシーの 'import-x/resolver' ではなく 'import-x/resolver-next' を使用する。
+      // resolve.js の fullResolve() は resolver-next が設定されていればレガシーパスを
+      // 完全にバイパスし、{ typescript: true } による誤ったリゾルバ読み込みを回避できる。
+      //
+      // createTypeScriptImportResolver は eslint-import-resolver-typescript が提供する関数で、
+      // tsconfig.json の paths/baseUrl 解決、package.json exports 解釈、
+      // .ts → .js 拡張子マッピング等に対応する。
+      //   https://github.com/import-js/eslint-import-resolver-typescript
+      //
+      'import-x/resolver-next': [
+        createTypeScriptImportResolver({
+          // @types/* パッケージからの型解決を常に試みる
+          alwaysTryTypes: true,
+        }),
+      ],
+    },
     rules: {
+      // TypeScript の型情報を使った named export の検証は不要
+      // （flatConfigs.typescript が設定していたルール）
+      'import-x/named': 'off',
       //
       // @typescript-eslint custom rules
       //
       '@typescript-eslint/naming-convention': namingConventionRule,
+      '@typescript-eslint/restrict-template-expressions': ['error', {
+        allowNumber: true,
+      }],
 
       //
       // import-x rules
@@ -110,7 +183,13 @@ export default tseslint.config(
       //   https://nodejs.org/api/esm.html#esm_mandatory_file_extensions
       //   https://github.com/import-js/eslint-plugin-import/blob/v2.17.2/docs/rules/extensions.md#examples
       //
-      'import-x/extensions': ['error', 'always', { ignorePackages: true }],
+      'import-x/extensions': ['error', 'always', {
+        ignorePackages: true,
+        pattern: {
+          ts: 'never',
+          tsx: 'never',
+        },
+      }],
 
       //
       // https://engineering.linecorp.com/ja/blog/you-dont-need-default-export
@@ -151,6 +230,22 @@ export default tseslint.config(
   },
 
   //
+  // Override for JS files
+  //
+  // JS ファイルは TypeScript のグローバル型定義 (lib.dom.d.ts 等) が適用されないため、
+  // console 等のグローバル変数が no-undef で未定義扱いになる。
+  // Node.js 環境のグローバル変数を明示的に設定する。
+  //
+  {
+    files: ['**/*.js'],
+    languageOptions: {
+      globals: {
+        console: 'readonly',
+      },
+    },
+  },
+
+  //
   // Override for config files (rollup, vitest, etc.)
   //
   {
@@ -161,3 +256,4 @@ export default tseslint.config(
     },
   },
 );
+export default eslintConfig;

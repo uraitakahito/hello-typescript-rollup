@@ -20,6 +20,7 @@
     "@rollup/plugin-typescript": "^12.1.2",
     "@uraitakahito/rollup-plugin-copy": "^3.5.4",
     "eslint": "^9.39.3",
+    "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import-x": "^4.16.1",
     "npm-check-updates": "^17.1.13",
     "rollup": "^4.59.0",

@@ -1,4 +1,4 @@
-/* eslint-disable import/no-duplicates */
+/* eslint-disable import-x/no-duplicates */
 /* eslint-disable no-console */
 
 // MEMO:

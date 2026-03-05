@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /* eslint-disable no-console */
 function fizzbuzz(n: number): number | 'Fizz' | 'Buzz' | 'FizzBuzz' {
   if (n % 15 === 0) {

@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import type { RollupOptions } from 'rollup';
 
 import typescript from '@rollup/plugin-typescript';
@@ -89,7 +88,7 @@ const config: RollupOptions[] = [
     //
     onwarn(warning, warn) {
       if (warning.code === 'UNRESOLVED_IMPORT') {
-        throw new Error(`Unresolved import: ${warning}`);
+        throw new Error(`Unresolved import: ${warning.message}`);
       }
       warn(warning);
     },
